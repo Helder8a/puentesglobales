@@ -1,1002 +1,502 @@
-/* --- Variables y Reset Básico --- */
+/*----------------------------------------------------
+  1. CSS Variables
+----------------------------------------------------*/
 :root {
-    /* Paleta de colores para labores benéficas */
-    --primary-color: #3498db;
-    /* Azul medio/claro: Confianza, Globalidad, Serenidad */
-    --secondary-color: #f8f9fa;
-    /* Blanco roto/Crema muy suave: Calidez, limpieza, fondo */
-    --text-color: #343a40;
-    /* Gris oscuro para el texto principal: Legibilidad */
-    --light-text-color: #6c757d;
-    /* Gris más claro para metadatos: Suavidad */
+    /* Colors */
+    --primary-color: #007bff; /* Bootstrap's primary blue */
+    --secondary-color: #6c757d; /* Bootstrap's secondary grey */
+    --dark-color: #343a40; /* Dark grey for header/footer */
+    --white-color: #ffffff;
+    --light-grey: #f8f9fa; /* Light background */
     --border-color: #e9ecef;
-    /* Borde muy suave: Separación sutil */
-    --header-bg: #212529;
-    /* Azul oscuro casi negro para cabecera y pie: Profesionalidad */
-    --footer-bg: #212529;
-    /* Azul oscuro casi negro para pie de página */
-    --accent-color: #28a745;
-    /* Verde esperanza: Crecimiento, acción positiva (ej. "Ver Detalles") */
-    --donate-button-color: #ffc107;
-    /* Amarillo/Oro suave: Llamativo, valor, esperanza para donar */
-    --deadline-color: #dc3545;
-    /* Rojo para fechas límite: Urgencia/Atención */
+    --danger-color: #dc3545; /* Bootstrap's danger red */
+    --warning-color: #ffc107; /* Bootstrap's warning yellow */
 
-    /* Colores para botones de compartir en redes sociales */
-    --twitter-color: #1DA1F2;
-    --facebook-color: #1877F2;
-    --linkedin-color: #0A66C2;
-    --whatsapp-color: #25D366;
-    /* Color de WhatsApp */
+    /* Fonts */
+    --font-roboto: 'Roboto', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+
+    /* Border Radius */
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 1rem;
+
+    /* Shadows */
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow-lg: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
-/* Base de diseño para dispositivos pequeños (Mobile First) */
-* {
+/*----------------------------------------------------
+  2. Global Styles / Base
+----------------------------------------------------*/
+body {
+    font-family: var(--font-roboto);
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: var(--light-grey);
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background: var(--secondary-color);
-    overflow-x: hidden;
-    /* Previene el scroll horizontal no deseado */
-}
-
-/* El .container de Bootstrap ya maneja el ancho máximo y el padding.
-   Se mantiene aquí para asegurar el max-width en caso de que no se use la clase de Bootstrap en algún div */
-.container {
-    max-width: 1200px;
+    box-sizing: border-box; /* Ensure consistent box model */
 }
 
 a {
-    color: var(--primary-color);
     text-decoration: none;
+    color: var(--primary-color);
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #1a6da6;
-    /* Tono más oscuro de primary al pasar el ratón */
+    color: #0056b3; /* Darker shade of primary */
 }
 
-ul {
-    list-style: none;
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-montserrat);
+    color: var(--dark-color);
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 700; /* Assuming Montserrat is bold for headings */
 }
 
-/* --- Cabecera Principal --- */
+/* Ensure font-display for custom fonts */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2') format('woff2');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: url('https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1Mu5ykzNYo.woff2') format('woff2');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHr6I_B3Xzjo.woff2') format('woff2');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    src: url('https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHr6I_B3Xzjo.woff2') format('woff2'); /* Assuming bold is also here or separate */
+    font-display: swap;
+}
+
+
+/* Adjust Bootstrap container for consistency if needed */
+.container {
+    max-width: 1140px; /* Standard large container */
+}
+
+/*----------------------------------------------------
+  3. Header & Navigation
+----------------------------------------------------*/
 .main-header {
-    background: var(--header-bg);
-    color: #fff;
-    padding: 0;
-    /* Bootstrap navbar maneja el padding */
-    border-bottom: 5px solid var(--primary-color);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: var(--dark-color);
+    padding: var(--spacing-sm) 0;
+    box-shadow: var(--shadow-md);
 }
 
 .main-header .navbar-brand {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2em;
-    margin-bottom: 0;
+    font-size: var(--spacing-lg); /* 1.8rem */
+    font-weight: 700;
+    letter-spacing: -0.05rem;
+}
+
+.main-header .navbar-brand a {
+    color: var(--white-color) !important; /* Override Bootstrap */
 }
 
 .main-header .navbar-nav .nav-link {
-    color: #fff;
-    font-weight: 700;
-    padding: 10px 15px;
-    /* Ajustado para mejor espaciado */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    /* Separador para móvil */
-    transition: background-color 0.3s ease, color 0.3s ease;
+    color: rgba(255, 255, 255, 0.75) !important; /* Lighter white for links */
+    padding: var(--spacing-xs) var(--spacing-sm);
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: var(--border-radius-sm);
 }
 
-.main-header .navbar-nav .nav-item:last-child .nav-link {
-    border-bottom: none;
-}
-
-.main-header .navbar-nav .nav-link:hover {
-    color: var(--primary-color);
+.main-header .navbar-nav .nav-link:hover,
+.main-header .navbar-nav .nav-link.active {
+    color: var(--white-color) !important;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* --- Contenido Principal (Bootstrap Grid) --- */
-/* Se elimina el display: flex y gap del .main-content porque Bootstrap row/col lo manejan */
-.main-content {
-    /* No se aplican estilos de layout aquí directamente, se usan las clases row y col de Bootstrap */
+/* Toggler icon color for dark navbar */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
-/* Títulos de secciones */
-.latest-news h2,
-.sidebar h2,
-.call-for-proposals h2,
-.contact-section h2,
-.about-section h2,
-.full-article .article-title,
-.full-convocatoria .convocatoria-title,
-.comments-section h3,
-.related-convocations h3,
-.about-section h3,
-.advertise-section h2,
-.advertise-section h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.8em;
-    color: var(--header-bg);
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 10px;
-    /* text-align se controla con clases de Bootstrap (text-center, text-lg-start) */
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* News Item Styles - Usando Bootstrap Card */
-.news-item {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: none;
-    /* Elimina el borde predeterminado de card de Bootstrap */
-}
-
-.news-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.news-item img {
-    width: 100%;
-    height: 220px;
-    /* Altura fija para las imágenes de las tarjetas */
-    object-fit: cover;
-    display: block;
-    border-top-left-radius: 8px;
-    /* Redondeo de las esquinas superiores */
-    border-top-right-radius: 8px;
-}
-
-.news-item h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.3em;
-    margin-bottom: 8px;
-    /* Ajuste para el espaciado dentro de card-body */
-    color: var(--primary-color);
-}
-
-.news-item .news-meta {
-    font-size: 0.85em;
-    color: var(--light-text-color);
-}
-
-.news-item p {
-    font-size: 0.95em;
-    color: var(--text-color);
-}
-
-
-/* Convocation Item Styles - Usando Bootstrap Card */
-.convocatoria-item {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 5px solid var(--accent-color);
-    border: none;
-    /* Elimina el borde predeterminado de card de Bootstrap */
-}
-
-.convocatoria-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.convocatoria-item h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-}
-
-.convocatoria-item .convocatoria-meta {
-    font-size: 0.9em;
-    color: var(--light-text-color);
-    margin-bottom: 15px;
-}
-
-.convocatoria-item p {
-    margin-bottom: 10px;
-}
-
-.convocatoria-item .deadline {
-    font-weight: 700;
-    color: var(--deadline-color);
-    margin-top: 15px;
-    margin-bottom: 20px;
-    border-top: 1px dashed var(--border-color);
-    padding-top: 15px;
-}
-
-/* Sidebar Styles */
-.sidebar {
-    background: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.sidebar ul {
-    margin-bottom: 25px;
-}
-
-.sidebar li {
-    margin-bottom: 0;
-    /* Se ajusta el margen, ya que ul ahora es list-unstyled de Bootstrap */
-}
-
-.sidebar a {
-    display: block;
-    padding: 8px 0;
-    border-bottom: 1px dashed var(--border-color);
-    color: var(--text-color);
-}
-
-.sidebar a:hover {
-    color: var(--primary-color);
-}
-
-/* Donate Button Styles (General) */
-.donate-button {
-    display: block;
-    width: fit-content;
-    margin: 20px auto;
-    padding: 15px 30px;
-    background-color: var(--donate-button-color);
-    color: var(--header-bg) !important;
-    /* Asegura el color del texto */
-    text-align: center;
-    border-radius: 50px;
-    font-size: 1.2em;
-    font-weight: 700;
-    text-transform: uppercase;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.donate-button:hover {
-    background-color: #e0a800;
-    transform: translateY(-2px);
-}
-
-/* Donate Sidebar Section */
-.donate-sidebar {
-    background-color: #e2f0f7;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 30px;
-    text-align: center;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-.donate-sidebar h3 {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--primary-color);
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.donate-sidebar p {
-    font-size: 0.9em;
-    margin-bottom: 20px;
-    color: var(--light-text-color);
-}
-
-/* Newsletter Signup Section */
-.newsletter-signup {
-    background-color: #d4edda;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 30px;
-    text-align: center;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-}
-
-.newsletter-signup h3 {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--accent-color);
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.newsletter-signup p {
-    font-size: 0.9em;
-    margin-bottom: 15px;
-    color: var(--light-text-color);
-}
-
-.newsletter-signup form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.newsletter-signup input[type="email"] {
-    padding: 10px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.newsletter-signup .submit-button {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 700;
-    transition: background-color 0.3s ease;
-}
-
-.newsletter-signup .submit-button:hover {
-    background-color: #1a6da6;
-}
-
-/* Donate Button in Footer - uses .donate-button global style */
-.donate-footer {
-    margin-top: 25px;
-}
-
-/* --- Pie de Página --- */
-.main-footer {
-    background: var(--footer-bg);
-    color: #fff;
-    text-align: center;
-    padding: 25px 0;
-    font-size: 0.85em;
-}
-
-.main-footer .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.footer-nav ul {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.footer-nav a {
-    color: #fff;
-}
-
-.footer-nav a:hover {
-    color: var(--primary-color);
-}
-
-/* NUEVOS ESTILOS PARA LA SECCIÓN DE COLABORADORES DEL FOOTER */
-.footer-collaborators {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-}
-
-.footer-collaborators h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2em;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-.footer-collaborators ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-.footer-collaborators li {
-    margin-bottom: 0;
-}
-
-.footer-collaborators a {
-    color: #fff;
-    font-weight: 400;
-    padding: 5px 10px;
-    border-bottom: 1px solid transparent;
-}
-
-.footer-collaborators a:hover {
-    color: var(--primary-color);
-    border-bottom: 1px solid var(--primary-color);
-}
-
-
-/* --- Article & Convocation Full Page Styles --- */
-.simple-page .about-section,
-.advertise-section, /* Added for advertise-with-us.html */
-.article-page .full-article,
-.convocation-page .full-convocatoria {
-    background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-.article-page .full-article .article-meta,
-.convocation-page .full-convocatoria .convocatoria-meta {
-    font-size: 0.9em;
-    color: var(--light-text-color);
-    margin-bottom: 20px;
-    /* text-align se controla con clases de Bootstrap */
-}
-
-.article-page .full-article .article-meta a,
-.convocation-page .full-convocatoria .convocatoria-meta a {
-    font-weight: 700;
-}
-
-.article-page .full-article img {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 30px;
-}
-
-.article-page .full-article .article-body,
-.convocation-page .full-convocatoria .convocatoria-body {
-    font-size: 1.1em;
-    line-height: 1.8;
-    margin-bottom: 30px;
-}
-
-.article-page .full-article h4,
-.convocation-page .full-convocatoria h4 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.6em;
-    color: var(--primary-color);
-    margin-top: 30px;
-    margin-bottom: 15px;
-}
-
-.article-page .full-article ul,
-.convocation-page .full-convocatoria ul {
-    list-style: disc;
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
-
-/* Contact Form Specific Styles */
-.contact-info {
-    text-align: center;
-    margin-bottom: 30px;
-    line-height: 1.8;
-    font-size: 1.1em;
-}
-
-.contact-info p strong {
-    color: var(--primary-color);
-}
-
-.contact-form {
-    margin-top: 30px;
-    background: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.contact-form h3 {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--primary-color);
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 700;
-    color: var(--text-color);
-}
-
-/* Input y textarea ya son controlados por form-control de Bootstrap */
-.form-group input[type="text"]:focus,
-.form-group input[type="email"]:focus,
-.form-group textarea:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
-    /* Sombra de foco de Bootstrap */
-}
-
-.contact-form .submit-button {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1em;
-    font-weight: 700;
-    display: block;
-    width: fit-content;
-    margin: 20px auto 0;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.contact-form .submit-button:hover {
-    background-color: #1a6da6;
-    transform: translateY(-2px);
-}
-
-.form-note {
-    font-size: 0.85em;
-    color: var(--light-text-color);
-    text-align: center;
-    margin-top: 15px;
-}
-
-/* About Section Specific Styles */
-.about-image {
-    display: block;
-    margin: 0 auto 30px auto;
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.about-section ul,
-.advertise-section ul { /* Added for advertise-with-us.html */
-    list-style: disc;
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
-
-/* Share Buttons Section */
-.share-buttons {
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
-}
-
-.share-buttons h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.4em;
-    color: var(--header-bg);
-    margin-bottom: 20px;
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.share-buttons .share-button {
-    display: inline-block;
-    padding: 12px 20px;
-    margin: 5px;
-    border-radius: 5px;
-    color: white;
-    font-weight: 700;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    min-width: 120px;
-}
-
-.share-button.twitter {
-    background-color: var(--twitter-color);
-}
-
-.share-button.twitter:hover {
-    background-color: #0c85d0;
-    transform: translateY(-2px);
-}
-
-.share-button.facebook {
-    background-color: var(--facebook-color);
-}
-
-.share-button.facebook:hover {
-    background-color: #1561cc;
-    transform: translateY(-2px);
-}
-
-.share-button.linkedin {
-    background-color: var(--linkedin-color);
-}
-
-.share-button.linkedin:hover {
-    background-color: #084c98;
-    transform: translateY(-2px);
-}
-
-.share-button.whatsapp {
-    background-color: var(--whatsapp-color);
-}
-
-.share-button.whatsapp:hover {
-    background-color: #1faf58;
-    transform: translateY(-2px);
-}
-
-/* --- Elegant Banner Styles --- */
 
-/* Wrapper for banner placement, ensures spacing */
+/*----------------------------------------------------
+  4. Ad Banner Section
+----------------------------------------------------*/
 .ad-banner-placement {
-    margin-bottom: 20px;
-}
-
-/* --- Homepage Header Banner (.elegant-banner-home) --- */
-.elegant-banner-home {
-    background-color: #ffffff; /* White background for clean look */
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    overflow: hidden; /* Ensures content stays within rounded corners */
-    transition: all 0.3s ease-in-out;
-    max-width: 1200px; /* Aligns with container width */
-    margin: 20px auto; /* Center it */
-}
-
-.elegant-banner-home:hover {
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+    background-color: #e9f7ef; /* Light green background for prominence */
+    border-bottom: 1px solid #d4edda;
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-lg); /* Space below the banner */
 }
 
 .elegant-banner-home .banner-link {
-    display: block; /* Make the whole area clickable */
+    display: block;
     text-decoration: none;
     color: inherit;
 }
 
 .elegant-banner-home .banner-content {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 15px 20px;
+    justify-content: center; /* Center horizontally */
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--white-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
     text-align: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: var(--spacing-sm); /* Gap between elements */
 }
 
 .elegant-banner-home .banner-logo {
-    max-width: 80px; /* Size for the logo */
-    height: auto;
-    margin-bottom: 10px;
-    border-radius: 4px; /* Slight round for logo image */
+    max-height: 50px; /* Adjust as needed */
+    width: auto;
+    object-fit: contain;
+    margin-right: var(--spacing-sm); /* Space next to text on larger screens */
 }
 
 .elegant-banner-home .banner-text-area {
-    flex-grow: 1;
-    margin-bottom: 15px;
+    flex-grow: 1; /* Allows text to take available space */
+    text-align: left; /* Align text to left within its area */
 }
 
 .elegant-banner-home .banner-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.4em;
     color: var(--primary-color);
-    margin-bottom: 5px;
-    line-height: 1.3;
-    border-bottom: none; /* Remove section title border */
-    padding-bottom: 0;
+    margin-bottom: 0.25rem;
+    font-size: var(--spacing-md); /* 1.5rem */
+    line-height: 1.2;
 }
 
 .elegant-banner-home .banner-description {
-    font-size: 0.95em;
-    color: var(--text-color);
+    color: var(--secondary-color);
     margin-bottom: 0;
+    font-size: 0.95rem;
 }
 
 .elegant-banner-home .banner-cta {
     background-color: var(--primary-color);
-    color: white;
-    padding: 8px 20px;
+    color: var(--white-color);
     border: none;
-    border-radius: 25px;
-    font-size: 0.9em;
-    font-weight: 700;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    white-space: nowrap; /* Prevent button text from breaking */
 }
 
 .elegant-banner-home .banner-cta:hover {
-    background-color: #1a6da6;
-    transform: translateY(-1px);
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect */
 }
 
-/* --- Article/Sidebar Banner (.elegant-banner-sidebar) --- */
-.elegant-banner-sidebar {
-    background-color: #ffffff;
+/* Responsive adjustments for ad banner */
+@media (max-width: 767.98px) {
+    .elegant-banner-home .banner-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--spacing-sm);
+    }
+    .elegant-banner-home .banner-logo {
+        margin-right: 0;
+        margin-bottom: var(--spacing-xs);
+    }
+    .elegant-banner-home .banner-text-area {
+        text-align: center;
+        margin-bottom: var(--spacing-sm);
+    }
+    .elegant-banner-home .banner-cta {
+        margin-left: 0;
+        width: 100%; /* Full width button on small screens */
+        max-width: 200px; /* Limit button width */
+    }
+}
+
+
+/*----------------------------------------------------
+  5. Main Content & News/Convocatorias
+----------------------------------------------------*/
+.main-content {
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+}
+
+.latest-news h2 {
+    font-size: var(--spacing-lg); /* 2rem */
+    margin-bottom: var(--spacing-md);
+}
+
+.news-grid .card {
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    text-align: center;
-    margin-top: 20px; /* Add some space above it in the sidebar */
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.elegant-banner-sidebar:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.news-grid .card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.news-grid .card-body {
+    padding: var(--spacing-md);
+}
+
+.news-grid .card-title {
+    color: var(--primary-color);
+    font-size: 1.25rem; /* h5 size */
+    margin-bottom: var(--spacing-sm);
+}
+
+.news-grid .card-text {
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.news-grid .card-text.news-meta {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #888;
+}
+
+.news-grid .card-text.deadline {
+    color: var(--danger-color) !important; /* Keep red for deadline */
+    font-weight: bold;
+    margin-top: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+    font-size: 1rem;
+}
+
+.news-grid .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--border-radius-sm);
+    align-self: flex-start; /* Keeps button left-aligned if parent is flex */
+}
+
+/*----------------------------------------------------
+  6. Contact Page Specific Styles
+----------------------------------------------------*/
+.simple-page {
+    /* Styles for pages like contact that don't have complex layouts */
+    max-width: 800px; /* Max width for simple content */
+    margin: var(--spacing-lg) auto;
+}
+
+.contact-section {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-xl) !important; /* Override Bootstrap padding */
+}
+
+.contact-section h2 {
+    font-size: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--dark-color);
+}
+
+.contact-info {
+    margin-bottom: var(--spacing-xl);
+}
+
+.contact-info p.lead {
+    font-size: 1.15rem;
+    color: var(--dark-color);
+    margin-bottom: var(--spacing-xs);
+}
+
+.contact-info a {
+    font-weight: 500;
+}
+
+.contact-form {
+    background-color: var(--light-grey);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg) !important;
+}
+
+.contact-form .form-label {
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-bottom: 0.25rem;
+}
+
+.contact-form .form-control {
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+}
+
+.contact-form .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+.contact-form .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: 0.75rem var(--spacing-lg);
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: var(--border-radius-md);
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
     transform: translateY(-2px);
 }
 
-.elegant-banner-sidebar .banner-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
+.form-note {
+    font-size: 0.85rem;
+    margin-top: var(--spacing-sm);
 }
 
-.elegant-banner-sidebar .banner-image-sidebar {
-    width: 100%;
-    height: 150px; /* Fixed height for sidebar image */
-    object-fit: cover;
-    display: block;
-    border-bottom: 1px solid var(--border-color);
+/*----------------------------------------------------
+  7. Footer
+----------------------------------------------------*/
+.main-footer {
+    background-color: var(--dark-color);
+    color: rgba(255, 255, 255, 0.8);
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    margin-top: var(--spacing-xl); /* Space from main content */
 }
 
-.elegant-banner-sidebar .banner-text-sidebar {
-    padding: 15px;
+.main-footer p {
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.95rem;
 }
 
-.elegant-banner-sidebar .banner-title-sidebar {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2em;
+.main-footer .footer-nav ul {
+    padding: 0;
+    margin-bottom: var(--spacing-md);
+}
+
+.main-footer .footer-nav li a {
+    color: var(--white-color) !important; /* Override Bootstrap for dark background */
+    font-size: 0.9rem;
+}
+
+.main-footer .footer-nav li a:hover {
+    color: var(--primary-color) !important;
+}
+
+.main-footer .donate-footer {
+    margin-bottom: var(--spacing-xl);
+}
+
+.main-footer .btn-warning {
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+    color: var(--dark-color) !important;
+    font-weight: bold;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 50px; /* Pill shape */
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.main-footer .btn-warning:hover {
+    background-color: #e0a800; /* Darker yellow on hover */
+    border-color: #e0a800;
+    transform: translateY(-2px);
+}
+
+.footer-collaborators {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--spacing-md);
+}
+
+.footer-collaborators h3 {
     color: var(--primary-color);
-    margin-bottom: 8px;
-    line-height: 1.3;
-    border-bottom: none; /* Remove section title border */
-    padding-bottom: 0;
+    margin-bottom: var(--spacing-md);
+    font-size: 1.25rem;
 }
 
-.elegant-banner-sidebar .banner-description-sidebar {
-    font-size: 0.85em;
-    color: var(--text-color);
-    margin-bottom: 15px;
+.footer-collaborators ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-md);
 }
 
-.elegant-banner-sidebar .banner-cta-sidebar {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 6px 15px;
-    border: none;
-    border-radius: 20px;
-    font-size: 0.85em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+.footer-collaborators li a {
+    color: rgba(255, 255, 255, 0.7) !important; /* Slightly faded white */
+    font-size: 0.9rem;
+    white-space: nowrap; /* Keep collaborator names on one line */
 }
 
-.elegant-banner-sidebar .banner-cta-sidebar:hover {
-    background-color: #1a6da6;
-    transform: translateY(-1px);
+.footer-collaborators li a:hover {
+    color: var(--white-color) !important;
 }
 
-
-/* --- Media Queries para tablets y escritorios --- */
-
-/* Para pantallas de al menos 600px (tablets pequeñas y superiores) */
-@media (min-width: 600px) {
+/*----------------------------------------------------
+  8. Responsive Overrides (if needed)
+----------------------------------------------------*/
+/* Small devices (phones, 576px and down) */
+@media (max-width: 575.98px) {
     .main-header .navbar-brand {
-        font-size: 2.2em;
+        font-size: 1.6rem;
     }
 
-    .main-header .navbar-nav .nav-link {
-        padding: 5px 10px;
-        border-bottom: 2px solid transparent;
+    .main-content, .contact-section, .main-footer {
+        padding-left: var(--spacing-sm) !important;
+        padding-right: var(--spacing-sm) !important;
     }
 
-    .news-item img {
-        height: 180px;
+    .contact-section {
+        padding: var(--spacing-lg) !important; /* Reduce padding on small screens */
     }
 
-    .donate-button {
-        padding: 12px 25px;
-        font-size: 1.1em;
-    }
-
-    .newsletter-signup form {
-        flex-direction: row;
-        gap: 0;
-    }
-
-    .newsletter-signup input[type="email"] {
-        flex-grow: 1;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-
-    .newsletter-signup .submit-button {
-        width: auto;
-        margin: 0;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    .share-buttons .share-button {
-        padding: 10px 18px;
-        font-size: 0.95em;
-    }
-
-    .footer-collaborators h3 {
-        font-size: 1.3em;
-    }
-
-    /* Home banner adjustments for larger screens */
-    .elegant-banner-home .banner-content {
-        flex-direction: row;
-        justify-content: center;
-        text-align: left;
-    }
-
-    .elegant-banner-home .banner-logo {
-        margin-right: 20px;
-        margin-bottom: 0;
-    }
-
-    .elegant-banner-home .banner-text-area {
-        margin-bottom: 0;
-        max-width: 60%; /* Limit text width */
-    }
-
-    .elegant-banner-home .banner-title {
-        font-size: 1.6em;
-    }
-
-    .elegant-banner-home .banner-description {
-        font-size: 1em;
-    }
-
-    .elegant-banner-home .banner-cta {
-        margin-left: 20px;
-        font-size: 1em;
-        padding: 10px 25px;
-    }
-}
-
-/* Para pantallas de al menos 768px (tablets grandes y escritorios pequeños) */
-@media (min-width: 768px) {
-    .main-header .navbar-brand {
-        font-size: 2.5em;
-    }
-
-    .main-header .navbar-nav .nav-link {
-        padding: 8px 15px;
-        /* Ajuste para escritorio */
-    }
-
-    .main-content .row {
-        /* Se remueve flex-direction: row y display: grid de .main-content
-           porque el row de Bootstrap ya lo hace. */
-        display: flex;
-        /* Asegura el comportamiento de flexbox para el layout principal */
-    }
-
-    .latest-news,
-    .full-article,
-    .full-convocatoria {
-        width: 66.666667%;
-        /* 8/12 de la grilla de Bootstrap */
-    }
-
-    .sidebar,
-    .article-sidebar,
-    .convocation-sidebar {
-        width: 33.333333%;
-        /* 4/12 de la grilla de Bootstrap */
-    }
-
-    .news-item img {
-        height: 250px;
-    }
-
-    .latest-news h2,
-    .sidebar h2,
-    .call-for-proposals h2,
-    .contact-section h2,
-    .about-section h2,
-    .full-article .article-title,
-    .full-convocatoria .convocatoria-title,
-    .advertise-section h2,
-    .advertise-section h3 {
-        text-align: left;
-    }
-
-    .article-page .full-article .article-meta,
-    .convocation-page .full-convocatoria .convocatoria-meta {
-        text-align: left;
-    }
-
-    .donate-sidebar {
-        padding: 25px;
-    }
-
-    .share-buttons h3 {
-        text-align: left;
-    }
-
-    .share-buttons .share-button {
-        padding: 12px 20px;
-        font-size: 1em;
-    }
-
-    .footer-collaborators h3 {
-        font-size: 1.4em;
+    .contact-form {
+        padding: var(--spacing-md) !important;
     }
 
     .footer-collaborators ul {
-        justify-content: flex-start;
-    }
-
-    /* Home banner adjustments for desktop */
-    .elegant-banner-home .banner-title {
-        font-size: 1.8em;
-    }
-
-    .elegant-banner-home .banner-description {
-        font-size: 1.1em;
-    }
-
-    .elegant-banner-home .banner-cta {
-        font-size: 1.1em;
-        padding: 12px 30px;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-xs);
     }
 }
 
-/* Para pantallas de al menos 1024px (escritorios grandes) */
-@media (min-width: 1024px) {
-    .main-header .navbar-brand {
-        font-size: 2.8em;
-    }
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Adjustments for tablets if specific needs arise */
+}
 
-    .main-header .navbar-nav .nav-link {
-        font-size: 1.1em;
-    }
-
-    .main-content {
-        padding: 40px 0;
-    }
-
-    .news-item h3 {
-        font-size: 1.5em;
-    }
-
-    .convocatoria-item h3 {
-        font-size: 1.6em;
-    }
-
-    .donate-button {
-        font-size: 1.3em;
-        padding: 18px 35px;
-    }
-
-    /* Home banner adjustments for very large screens */
-    .elegant-banner-home .banner-logo {
-        max-width: 120px;
-    }
-
-    .elegant-banner-home .banner-title {
-        font-size: 2em;
-    }
-
-    .elegant-banner-home .banner-description {
-        font-size: 1.2em;
-    }
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    /* Fine-tuning for larger screens if necessary */
 }
