@@ -251,6 +251,12 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--spacing-md);
 }
 
+/* News grid specific styles - the row-cols classes handle much of the responsive layout */
+.news-grid {
+    /* No specific display:flex; or flex-wrap; needed here as .row already handles it */
+    /* .g-4 class on the HTML handles the gaps */
+}
+
 .news-grid .card {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
